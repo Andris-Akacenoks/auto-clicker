@@ -1,8 +1,9 @@
 # Auto-Clicker
 
-A (very) tiny app that performs mouse clicks at the speed of your choise.
+A (very) tiny JavaFX app that performs mouse clicks at the speed of your choice. Tested on macOS Mojave.
 
-To lauch Auto Clicker, open:
+To launch Auto Clicker, open:
 ```out/artifacts/AutoClicker/AutoClicker.jar```
-Or lauch via Terminal:
+
+Or launch via Terminal:
 ```java -jar out/artifacts/AutoClicker/AutoClicker.jar```
