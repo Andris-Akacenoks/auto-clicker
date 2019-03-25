@@ -32,18 +32,16 @@ public class Controller {
                 Robot robot = setRobot();
                 int frequency = getFrequency();
                 do {
-                    if (isClickingActive){
-                        robot.mousePress(InputEvent.BUTTON1_MASK);
-                        robot.mouseRelease(InputEvent.BUTTON1_MASK);
-                        try {
-                            Thread.sleep(frequency);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        PointerInfo a = MouseInfo.getPointerInfo();
-                        Point b = a.getLocation();
-                        robot.mouseMove((int) b.getX(), (int) b.getY());
+                    robot.mousePress(InputEvent.BUTTON1_MASK);
+                    robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    try {
+                        Thread.sleep(frequency);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+                    PointerInfo a = MouseInfo.getPointerInfo();
+                    Point b = a.getLocation();
+                    robot.mouseMove((int) b.getX(), (int) b.getY());
                 } while(isClickingActive);
             }
         }).start();
