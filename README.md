@@ -1,4 +1,4 @@
-# Auto-Clicker
+# Auto Clicker
 
 A (very) tiny JavaFX app that performs mouse clicks at the speed of your choice. Tested on macOS Mojave.
 
