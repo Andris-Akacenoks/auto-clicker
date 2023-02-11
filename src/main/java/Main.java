@@ -1,4 +1,4 @@
-package sample;
+package main.java;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,11 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("clicker.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("clicker.fxml")));
         primaryStage.setTitle("Auto Clicker");
         primaryStage.setScene(new Scene(root, 242, 60));
         primaryStage.show();

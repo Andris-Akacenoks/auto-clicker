@@ -1,4 +1,4 @@
-package sample;
+package main.java;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,37 +13,35 @@ public class Controller {
     @FXML public TextField frequencyInMilliseconds;
     private boolean isClickingActive = false;
 
-    public void handleStartClicking() {
+    public void startClicking() {
         activateClicking();
         startClicking.setDisable(true);
         stopClicking.setDisable(false);
         performClicking();
     }
 
-    public void handleStopClicking(){
+    public void stopClicking(){
         disableClicking();
         startClicking.setDisable(false);
         stopClicking.setDisable(true);
     }
 
     private void performClicking(){
-        new Thread(new Runnable() {
-            public void run() {
-                Robot robot = setRobot();
-                int frequency = getFrequency();
-                do {
-                    robot.mousePress(InputEvent.BUTTON1_MASK);
-                    robot.mouseRelease(InputEvent.BUTTON1_MASK);
-                    try {
-                        Thread.sleep(frequency);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    PointerInfo a = MouseInfo.getPointerInfo();
-                    Point b = a.getLocation();
-                    robot.mouseMove((int) b.getX(), (int) b.getY());
-                } while(isClickingActive);
-            }
+        new Thread(() -> {
+            Robot robot = setupRobot();
+            int frequency = getFrequency();
+            do {
+                robot.mousePress(InputEvent.BUTTON1_MASK);
+                robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                try {
+                    Thread.sleep(frequency);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                PointerInfo a = MouseInfo.getPointerInfo();
+                Point b = a.getLocation();
+                robot.mouseMove((int) b.getX(), (int) b.getY());
+            } while(isClickingActive);
         }).start();
     }
 
@@ -57,7 +55,7 @@ public class Controller {
 
     private int getFrequency(){
         try {
-            int frequency = Integer.valueOf(frequencyInMilliseconds.getText());
+            int frequency = Integer.parseInt(frequencyInMilliseconds.getText());
             if (frequency >= 50 && frequency <= 60 * 1000) {
                 return frequency;
             } else {
@@ -69,14 +67,12 @@ public class Controller {
         }
     }
 
-    private Robot setRobot(){
+    private Robot setupRobot(){
         try {
             return new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException("Couldn't set robot", e);
         }
-        catch (AWTException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }
